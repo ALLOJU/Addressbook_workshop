@@ -11,7 +11,7 @@ public class Person {
 	private String city;
 	private String state;
 	private int zip;
-	private String phone_number;
+	private long phone_number;
 	private String email;
 	/**
 	 * created setters and getters for setting data and retrieve data
@@ -53,10 +53,10 @@ public class Person {
 	public void setZip(int zip) {
 		this.zip = zip;
 	}
-	public String getPhone_number() {
+	public long getPhone_number() {
 		return phone_number;
 	}
-	public void setPhone_number(String phone_number) {
+	public void setPhone_number(long phone_number) {
 		this.phone_number = phone_number;
 	}
 	public String getEmail() {
@@ -78,7 +78,7 @@ public class Person {
 	 * @param email
 	 */
 	public Person(String firstname, String lastname, String address, String city, String state, int zip,
-			String phone_number, String email) {
+			long phone_number, String email) {
 		super();
 		this.firstname = firstname;
 		this.lastname = lastname;
