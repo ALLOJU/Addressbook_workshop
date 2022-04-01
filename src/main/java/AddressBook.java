@@ -37,9 +37,22 @@ public class AddressBook {
 		int number = sc.nextInt();
 		for (int i = 0; i < number; i++) {
 			System.out.println("Enter the contact details of person ");
-			createContact();
+			checkDuplicates();
 		}
 	}
+	public void checkDuplicates() throws AddressBookException {
+		Scanner sc=new Scanner(System.in);
+		System.out.println(" Please enter the first name:");
+		String name = sc.next();
+		for(Person i : persons) {
+		   if(i.getFirstname().equals(name)) {
+			   System.out.println(" Given name already exists");
+		   } return;
+        }  createContact();
+
+		
+	}
+
 	/**
 	 * 3.This method is used to create contact and store the values into arraylist
 	 * 
