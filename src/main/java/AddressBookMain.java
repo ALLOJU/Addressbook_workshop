@@ -31,7 +31,15 @@ public class AddressBookMain {
 
 	}
 
-
+	public void addContact() throws AddressBookException {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter the number of contacts you want to enter");
+        int number = sc.nextInt();
+        for (int i = 0; i < number; i++) {
+            System.out.println("Enter the contact details of person ");
+            createContact();
+        }
+	}
 	/**
 	 * 3.This method is used to create contact and store the values into arraylist
 	 * 
@@ -231,7 +239,7 @@ public class AddressBookMain {
 			switch (num) {
 			case 1:
 
-				ab.createContact();
+				ab.addContact();
 				ab.display();
 	
 				break;
