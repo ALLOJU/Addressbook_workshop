@@ -3,7 +3,7 @@ import java.util.regex.Pattern;
 
 public class Validations {
 	public String regex;
-	public boolean firstNameofUser(String firstName) {
+	public boolean firstNameofUser(String firstName) throws AddressBookException{
 		/**
 		 *  Regex to check valid username.
 		 */
@@ -29,7 +29,7 @@ public class Validations {
 			System.out.println("First Name Valid");
 		}
 		else {
-			System.out.println("First name should start with Capital letter and has minimum 3 character");
+			throw new AddressBookException("First name should start with Capital letter and has minimum 3 character");
 
 		}
 		return m.matches();
@@ -42,7 +42,7 @@ public class Validations {
 	 * @param lastName - input name of the user
 	 * @return - returns true or false based on the condition
 	 */
-	public boolean lastNameofUser(String lastName) {
+	public boolean lastNameofUser(String lastName) throws AddressBookException {
 		regex="^[A-Z][a-z]{2}";
 		Pattern p=Pattern.compile(regex);
 		if (lastName == null) {
@@ -58,7 +58,7 @@ public class Validations {
 			System.out.println("Last Name  Valid");
 		}
 		else {
-			System.out.println("Last name should start with Capital letter and has minimum 3 character");
+		throw new AddressBookException("Last name should start with Capital letter and has minimum 3 character");
 
 		}
 		return m.matches();
@@ -68,7 +68,7 @@ public class Validations {
 	 * @param email - email ids of the user
 	 * @return - returns true or false based on the condition
 	 */
-	public boolean emaiIdofUser(String email) {
+	public boolean emaiIdofUser(String email) throws AddressBookException {
 		regex="^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
 		Pattern p=Pattern.compile(regex);
 		if (email == null) {
@@ -84,7 +84,7 @@ public class Validations {
 			System.out.println("Email Id  Valid");
 		}
 		else {
-			System.out.println("Email Id Not Valid");
+			throw new AddressBookException("Email Id Not Valid");
 
 		}
 		return m.matches();
@@ -94,7 +94,7 @@ public class Validations {
 	 * @param phone - input phone number given by the user
 	 * @return - it returns true or false based on the given regular expression
 	 */
-	public boolean mobileNumberOfUser(String phone) {
+	public boolean mobileNumberOfUser(String phone)  {
 		regex="^([0-9]{2}[\\s]){1}[0-9]{9,10}$";
 		
 		Pattern p=Pattern.compile(regex);

@@ -6,6 +6,15 @@ import java.util.regex.Pattern;
 
 public class AddressBookMain {
 	/**
+	 * PROCEDURE:
+	 * 1.Creating arraylist object
+	 * 2.created constructor
+	 * 3.createContact- This method is used to create contact and store the values into arraylist
+	 * 4.editPerson - Method to edit contact details of person with their name
+	 * 5.findContacts - find contacts with the given name
+	 * 
+	 */
+	/**
 	 * Created a array list of type ContactDetails and calling the function of
 	 * createContact.
 	 */
@@ -24,11 +33,12 @@ public class AddressBookMain {
 
 
 	/**
-	 * This method is used to create contact and store the values into arraylist
+	 * 3.This method is used to create contact and store the values into arraylist
 	 * 
 	 * @return - returns list of contacts
+	 * @throws AddressBookException 
 	 */
-	public  void createContact() {
+	public  void createContact() throws AddressBookException {
 		
 		/**
 		 * for input taken using scanner object
@@ -70,9 +80,10 @@ public class AddressBookMain {
 	}
 
 	/**
-	 * Method to edit contact details of person with their name
+	 *4. Method to edit contact details of person with their name
+	 * @throws AddressBookException 
 	 */
-	public void editPerson() {
+	public void editPerson() throws AddressBookException {
 		Scanner sc=new Scanner(System.in);
 		Validations v=new Validations();
 		Person persons=findContacts();
@@ -183,7 +194,18 @@ public class AddressBookMain {
 		}
 		return temp;
 	}
-
+	/**
+	 * Method to delete contacts with the given name
+	 */
+	public void deleteContact() {                                                                       //to delete contact
+		Person person = findContacts();
+		if (person == null) {
+			System.out.println("No contact found with the given name");
+			return;
+		}
+		persons.remove(person);                                                                        // remove method to delete the contact
+		System.out.println("The contact has been deleted from the Address Book");
+	}
 
 	public  void display() {
 		for (Person person : persons)
@@ -192,7 +214,7 @@ public class AddressBookMain {
 					+person.getCity()+"\t"+person.getState()+ "\t"+person.getZip()+"\t"+person.getPhone_number()+"\t"+person.getEmail());
 
 	}
-	public static void main(String[] args) {
+	public static void main(String[] args) throws AddressBookException {
 		AddressBookMain ab=new AddressBookMain();
 		int num;
 
@@ -200,6 +222,7 @@ public class AddressBookMain {
 
 			System.out.println("Please Enter 1 to add person details in Address Book");
 			System.out.println("Please Enter 2 to Edit person details in Address Book");
+			System.out.println("Please Enter 3 to delete person details in Address Book");
 
 			System.out.println("Choose option to perform action");
 			Scanner sc = new Scanner(System.in);
@@ -217,6 +240,9 @@ public class AddressBookMain {
 				ab.editPerson();
 				ab.display();
 				break;
+			case 3:
+				ab.deleteContact();
+				ab.display();
 			}
 		} while (num != 0);
 	}
