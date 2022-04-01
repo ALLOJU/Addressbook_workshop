@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class AddressBookMain {
+public class AddressBook {
 	/**
 	 * PROCEDURE:
 	 * 1.Creating arraylist object
@@ -21,12 +21,12 @@ public class AddressBookMain {
 	/**
 	 * 1.Creating arraylist object
 	 */
-	 ArrayList<Person> persons;
+	ArrayList<Person> persons;
 
 	/**
 	 * 2.created constructor
 	 */
-	public AddressBookMain() {
+	public AddressBook() {
 		persons=new ArrayList<Person>();
 
 	}
@@ -34,11 +34,11 @@ public class AddressBookMain {
 	public void addContact() throws AddressBookException {
 		Scanner sc=new Scanner(System.in);
 		System.out.println("Enter the number of contacts you want to enter");
-        int number = sc.nextInt();
-        for (int i = 0; i < number; i++) {
-            System.out.println("Enter the contact details of person ");
-            createContact();
-        }
+		int number = sc.nextInt();
+		for (int i = 0; i < number; i++) {
+			System.out.println("Enter the contact details of person ");
+			createContact();
+		}
 	}
 	/**
 	 * 3.This method is used to create contact and store the values into arraylist
@@ -47,20 +47,20 @@ public class AddressBookMain {
 	 * @throws AddressBookException 
 	 */
 	public  void createContact() throws AddressBookException {
-		
+
 		/**
 		 * for input taken using scanner object
 		 */
 		Validations v=new Validations();
 		Scanner sc = new Scanner(System.in);
-		
+
 		System.out.print("Enter the First name : ");
 		String fname = sc.next();
 		v.firstNameofUser(fname);
 		System.out.print("Enter the Last name : ");
 		String lname = sc.next();
 		v.lastNameofUser(lname);
-		
+
 		System.out.print("Enter the Address : ");
 		String address = sc.next();
 		System.out.print("Enter the City : ");
@@ -68,7 +68,7 @@ public class AddressBookMain {
 
 		System.out.print("Enter the state : ");
 		String state = sc.next();
-		
+
 		System.out.print("Enter the Zip Code : ");
 		int zip = sc.nextInt();
 
@@ -76,7 +76,7 @@ public class AddressBookMain {
 		long phone = sc.nextLong();
 		String phone_number=Long.toString(phone);
 		v.mobileNumberOfUser(phone_number);
-		
+
 		System.out.print("Enter the Email: ");
 		String email = sc.next();
 		v.emaiIdofUser(email);
@@ -84,7 +84,7 @@ public class AddressBookMain {
 		 * Data is added into the personDetail list
 		 */
 		persons.add(new Person(fname, lname, address, city, state, zip, phone, email));
-		
+
 	}
 
 	/**
@@ -143,7 +143,7 @@ public class AddressBookMain {
 			persons.setZip(newZipCode);
 			System.out.println("new zip code updated");
 			break;
-			
+
 		case 7:
 			System.out.println("Enter new phone number");
 			long newPhoneNumber = sc.nextLong();
@@ -153,7 +153,7 @@ public class AddressBookMain {
 			System.out.println("new phone number updated");
 
 			break;
-			
+
 		case 8:
 			System.out.println("Enter new email");
 			String newEmail = sc.next();
@@ -168,9 +168,9 @@ public class AddressBookMain {
 			break;
 		}
 		System.out.println("The contact after editing is : " + persons);
-		
+
 	}
-	
+
 
 	public Person findContacts() {
 		Scanner sc=new Scanner(System.in);
@@ -223,35 +223,42 @@ public class AddressBookMain {
 
 	}
 	public static void main(String[] args) throws AddressBookException {
-		AddressBookMain ab=new AddressBookMain();
-		int num;
-
-		do {
-
-			System.out.println("Please Enter 1 to add person details in Address Book");
-			System.out.println("Please Enter 2 to Edit person details in Address Book");
-			System.out.println("Please Enter 3 to delete person details in Address Book");
-
-			System.out.println("Choose option to perform action");
-			Scanner sc = new Scanner(System.in);
-			num = sc.nextInt();
-
-			switch (num) {
+		AddressBook ab=new AddressBook();
+		MultipleAddressBook ma=new MultipleAddressBook();
+		while (true) {
+			System.out.println("Enter \n 1. To add the new AddressBook\n 2. To add contact in AddressBook\n "
+					+ "3. To edit the contact in AddressBook\n 4. To delete the contact in AddressBook\n 5. To delete the AddressBook\n "
+					+ "6. To Print the AddressBook\n 7. To Print the contacts in AddressBook\n 0. To exit");
+			Scanner scanner = new Scanner(System.in);
+			int choice = scanner.nextInt();
+			switch (choice) {
 			case 1:
-
-				ab.addContact();
-				ab.display();
-	
+				ma.addAddressBook();
 				break;
-				
 			case 2:
-				ab.editPerson();
-				ab.display();
+				ma.addContact();
 				break;
 			case 3:
-				ab.deleteContact();
-				ab.display();
+				ma.editContactInBook();
+				break;
+			case 4:
+				ma.deleteContactInBook();
+				break;
+			case 5:
+				ma.deleteAddressBook();
+				break;
+			case 6:
+				ma.printBook();
+				break;
+			case 7:
+				ma.printContactsInBook();
+				break;
+			case 0:
+				System.exit(0);
+				break;
+			default:
+				System.out.println("Enter the wrong input");
 			}
-		} while (num != 0);
+		}
 	}
 }
