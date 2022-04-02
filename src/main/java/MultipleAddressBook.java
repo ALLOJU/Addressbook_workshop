@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -142,6 +143,21 @@ public class MultipleAddressBook {
 		List<Person>	list = addressBookMap.get(i).persons;
 		list.stream().filter(person -> person.getState().equals(stateName)).forEach(person -> System.out.println(person.getFirstname()));
 	  }	
+		
+	}
+	/**
+	 * Method to display people by using hashmap
+	 * @param addressBookMap
+	 */
+	public void displayPeopleByRegion(HashMap<String, ArrayList<Person>> addressBookMap) {
+		List<Person> persons;
+		for (String name : addressBookMap.keySet()) {
+			System.out.println("People residing in: " + name);
+			persons = addressBookMap.get(name);
+			for (Person person : persons) {
+				System.out.println(person);
+			}
+		}
 
 	}
 }

@@ -1,7 +1,6 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
 public class AddressBook {
@@ -22,6 +21,8 @@ public class AddressBook {
 	 * 1.Creating arraylist object
 	 */
 	ArrayList<Person> persons;
+	public static HashMap<String, ArrayList<Person>> personByCity  = new HashMap<String, ArrayList<Person>>();
+	public static HashMap<String, ArrayList<Person>> personByState = new HashMap<String, ArrayList<Person>>();
 
 	/**
 	 * 2.created constructor
@@ -37,21 +38,20 @@ public class AddressBook {
 		int number = sc.nextInt();
 		for (int i = 0; i < number; i++) {
 			System.out.println("Enter the contact details of person ");
-			checkDuplicates();
+			createContact();
 		}
 	}
-	public void checkDuplicates() throws AddressBookException {
-		Scanner sc=new Scanner(System.in);
-		System.out.println(" Please enter the first name:");
-		String name = sc.next();
-		for(Person i : persons) {
-		   if(i.getFirstname().equals(name)) {
-			   System.out.println(" Given name already exists");
-		   } return;
-        }  createContact();
-
-		
-	}
+	/*
+	 * public void checkDuplicates() throws AddressBookException { Scanner sc=new
+	 * Scanner(System.in); System.out.println(" Please enter the first name:");
+	 * String name = sc.next(); for(Person i : persons) {
+	 * if(i.getFirstname().equals(name)) {
+	 * System.out.println(" Given name already exists"); } return; }
+	 * createContact();
+	 * 
+	 * 
+	 * }
+	 */
 
 	/**
 	 * 3.This method is used to create contact and store the values into arraylist
@@ -227,7 +227,36 @@ public class AddressBook {
 		persons.remove(person);                                                                        // remove method to delete the contact
 		System.out.println("The contact has been deleted from the Address Book");
 	}
+	/**
+	 *  In this method we are checking the persob by city
+	 * @param contact- We are pasing the contact there
+	 */
+	public void addPersonToCity(Person person) {
+		if (personByCity.containsKey(person.getCity())) {
+			personByCity.get(person.getCity()).add(person);
+		}
+		else {
+			ArrayList<Person> cityList = new ArrayList<Person>();
+			cityList.add(person);
+			personByCity.put(person.getCity(), cityList);
+		}
+	}
 
+
+	/**
+	 *  In this method we are checking the person by state
+	 * @param contact- We are parsing the contact there
+	 */
+	public void addPersonToState(Person person) {
+		if (personByState.containsKey(person.getState())) {			
+			personByState.get(person.getState()).add(person);
+		}
+		else {
+			ArrayList<Person> stateList = new ArrayList<Person>();
+			stateList.add(person);
+			personByState.put(person.getState(), stateList);
+		}
+	}
 	public  void display() {
 		for (Person person : persons)
 
@@ -241,7 +270,7 @@ public class AddressBook {
 		while (true) {
 			System.out.println("Enter \n 1. To add the new AddressBook\n 2. To add contact in AddressBook\n "
 					+ "3. To edit the contact in AddressBook\n 4. To delete the contact in AddressBook\n 5. To delete the AddressBook\n "
-					+ "6. To Print the AddressBook\n 7. To Print the contacts in AddressBook\n 8. Search Person By City. \n 9. Search Person by State \n  0. To exit");
+					+ "6. To Print the AddressBook\n 7. To Print the contacts in AddressBook\n 8. Search Person By City. \n 9. Search Person by State \n 10. View Person by City \n 11. View Person by State  \n  0. To exit");
 			Scanner scanner = new Scanner(System.in);
 			int choice = scanner.nextInt();
 			switch (choice) {
@@ -270,6 +299,12 @@ public class AddressBook {
 				break;
 			case 9:
 				ma.searchByState();
+			case 10:
+				ma.displayPeopleByRegion(AddressBook.personByCity);
+				break;
+			case 11:
+				ma.displayPeopleByRegion(AddressBook.personByState);
+				break;
 			case 0:
 				System.exit(0);
 				break;
