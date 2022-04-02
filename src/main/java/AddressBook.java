@@ -270,7 +270,8 @@ public class AddressBook {
 		while (true) {
 			System.out.println("Enter \n 1. To add the new AddressBook\n 2. To add contact in AddressBook\n "
 					+ "3. To edit the contact in AddressBook\n 4. To delete the contact in AddressBook\n 5. To delete the AddressBook\n "
-					+ "6. To Print the AddressBook\n 7. To Print the contacts in AddressBook\n 8. Search Person By City. \n 9. Search Person by State \n 10. View Person by City \n 11. View Person by State  \n  0. To exit");
+					+ "6. To Print the AddressBook\n 7. To Print the contacts in AddressBook\n 8. Search Person By City. \n 9. Search Person by State \n 10. View Person by City \n 11. View Person by State  "
+					+ "\n 12. Count People \n  0. To exit");
 			Scanner scanner = new Scanner(System.in);
 			int choice = scanner.nextInt();
 			switch (choice) {
