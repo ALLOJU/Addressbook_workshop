@@ -89,6 +89,10 @@ public class Person {
 		this.phone_number = phone_number;
 		this.email = email;
 	}
+	
+	public Person() {
+		super();
+	}
 	/**
 	 * This method use to print all the value.
 	 */

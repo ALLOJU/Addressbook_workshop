@@ -1,14 +1,17 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class MultipleAddressBook {
 	/**
 	 * Creating map for storing addressbook and its values
 	 */
 	Map<String, AddressBook> addressBookMap = new HashMap<String, AddressBook>();
+	public Map<String, Person> persons = new HashMap<String, Person>();
 
 	/**
 	 * Method to add Address book to map
@@ -118,35 +121,37 @@ public class MultipleAddressBook {
 		}
 		System.out.println(" ");
 	}
+
 	/**
-	 * This method is used search person by city
-	 * here  we are using the streams filter to get the contact matching the city and then printing it.
+	 * This method is used search person by city here we are using the streams
+	 * filter to get the contact matching the city and then printing it.
 	 */
-	public void searchByCity() {
-		Scanner sc=new Scanner(System.in);
-		System.out.println("Enter the name of the City to get the persons : ");
-		String cityName = sc.next();
-		for (String i : addressBookMap.keySet()) {
-			List<Person> list = addressBookMap.get(i).persons;
-			list.stream().filter(person -> person.getCity().equals(cityName))
-					.forEach(person -> System.out.println(person.getFirstname()));
+	 public void searchByCity() {
+			Scanner sc=new Scanner(System.in);
+			System.out.println("Enter the name of the City to get the persons : ");
+			String cityName = sc.next();
+			for (String i : addressBookMap.keySet()) {
+			List<Person>	arr = (List<Person>) addressBookMap.get(i).persons;
+			arr.stream().filter(person -> person.getCity().equals(cityName)).forEach(person -> System.out.println(person.getFirstname()));
+	      }		
+	    }
+
+	/**
+	 * This method is used to search person by state
+	 */
+	 public void searchByState() {
+		 	Scanner sc=new Scanner(System.in);
+			System.out.println("Enter the name of the State to the get persons : ");
+			String stateName = sc.next();
+			for (String i : addressBookMap.keySet()) {
+			List<Person>	arr = (List<Person>) addressBookMap.get(i).persons;
+			arr.stream().filter(person -> person.getState().equals(stateName)).forEach(person -> System.out.println(person.getFirstname()));
+		  }		
 		}
-	} 
-	/**
-	 *This method is used to search person by state 
-	 */
-	public void searchByState() {
-		Scanner sc=new Scanner(System.in);
-		System.out.println("Enter the name of the State to the get persons : ");
-		String stateName = sc.next();
-		for (String i : addressBookMap.keySet()) {
-		List<Person>	list = addressBookMap.get(i).persons;
-		list.stream().filter(person -> person.getState().equals(stateName)).forEach(person -> System.out.println(person.getFirstname()));
-	  }	
-		
-	}
+
 	/**
 	 * Method to display people by using hashmap
+	 * 
 	 * @param addressBookMap
 	 */
 	public void displayPeopleByRegion(HashMap<String, ArrayList<Person>> addressBookMap) {
@@ -159,19 +164,43 @@ public class MultipleAddressBook {
 			}
 		}
 	}
+
 	/**
 	 * In this method we are displaying the number of person in the city or state.
-	 * @param listToDisplay - we are passing the list of city or state
+	 * 
+	 * @param list - we are passing the list of city or state
 	 */
 	public void countPeopleByRegion(HashMap<String, ArrayList<Person>> list) {
-		Scanner sc=new Scanner(System.in);
+		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter the name of the region :");
 		String regionName = sc.next();
 		long countPeople = list.values().stream()
-				.map(region -> region.stream().filter(person -> person.getState().equals(regionName) || person.getCity().equals(regionName)))
+				.map(region -> region.stream()
+						.filter(person -> person.getState().equals(regionName) || person.getCity().equals(regionName)))
 				.count();
-					
-		System.out.println("Number of People are " + regionName+" are: "+countPeople+"\n");
-		
-	   }
+
+		System.out.println("Number of People are " + regionName + " are: " + countPeople + "\n");
+
+	}
+
+	/**
+	 * Method to sort the address book by name
+	 */
+	public void sortAddressBook() {
+		for (String i : addressBookMap.keySet()) {
+			Map<String, Person> con = addressBookMap.get(i).persons;
+
+			List<Person> sorted = con.values().stream().sorted(
+					(firstperson, secondperson) -> firstperson.getFirstname().compareTo(secondperson.getFirstname()))
+					.collect(Collectors.toList());
+
+			System.out.println("------ Sorted Address Book ------");
+			Iterator iterator = sorted.iterator();
+			while (iterator.hasNext()) {
+				System.out.println(iterator.next());
+				System.out.println();
+			}
+		}
+	}
+	
 }
