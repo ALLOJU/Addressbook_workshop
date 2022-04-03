@@ -1,3 +1,6 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -228,6 +231,22 @@ public class MultipleAddressBook {
 			System.out.println();
 		}
 		System.out.println("-----------------------------------------");
+	}
+	/**
+	 * Method to write data to file
+	 */
+	public void writeToAddressBookFile(List<Person> personsList) {
+		StringBuffer temp=new StringBuffer();
+		personsList.forEach(person ->{
+			String data=person.toString().concat("\n");
+			temp.append(data);
+		});
+		try {
+			Files.write(Paths.get("C:\\Users\\nani\\Desktop\\contacts\\contact.txt"),temp.toString().getBytes());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	

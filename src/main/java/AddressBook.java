@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -262,11 +263,13 @@ public class AddressBook {
 	public static void main(String[] args) throws AddressBookException {
 		AddressBook ab=new AddressBook();
 		MultipleAddressBook ma=new MultipleAddressBook();
+		AddressBookIOServices io=new AddressBookIOServices();
+		List<Person> contact = new ArrayList<>();
 		while (true) {
 			System.out.println("Enter \n 1. To add the new AddressBook\n 2. To add contact in AddressBook\n "
 					+ "3. To edit the contact in AddressBook\n 4. To delete the contact in AddressBook\n 5. To delete the AddressBook\n "
 					+ "6. To Print the AddressBook\n 7. To Print the contacts in AddressBook\n 8. Search Person By City. \n 9. Search Person by State \n 10. View Person by City \n 11. View Person by State  "
-					+ "\n 12. Count People \n  0. To exit");
+					+ "\n 12. Count People \n 13.Write To File \n 14.Read from file  0. To exit");
 			Scanner scanner = new Scanner(System.in);
 			int choice = scanner.nextInt();
 			switch (choice) {
@@ -301,6 +304,13 @@ public class AddressBook {
 			case 11:
 				ma.displayPeopleByRegion(AddressBook.personByState);
 				break;
+			case 12:
+				ma.countPeopleByRegion(personByCity);
+			case 13:
+			
+				io.writeData(contact);
+			case 14:
+				io.printData();
 			case 0:
 				System.exit(0);
 				break;
