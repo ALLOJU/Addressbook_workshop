@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,7 +23,7 @@ public class AddressBook {
 	/**
 	 * 1.Creating arraylist object
 	 */
-	Map<String, Person> persons;
+	static Map<String, Person> persons;
 	public static HashMap<String, ArrayList<Person>> personByCity  = new HashMap<String, ArrayList<Person>>();
 	public static HashMap<String, ArrayList<Person>> personByState = new HashMap<String, ArrayList<Person>>();
 
@@ -260,7 +261,7 @@ public class AddressBook {
 			System.out.println(persons);
 			System.out.println("Value is " + persons.values());
 	}
-	public static void main(String[] args) throws AddressBookException {
+	public static void main(String[] args) throws AddressBookException, IOException {
 		AddressBook ab=new AddressBook();
 		MultipleAddressBook ma=new MultipleAddressBook();
 		AddressBookIOServices io=new AddressBookIOServices();
@@ -269,7 +270,8 @@ public class AddressBook {
 			System.out.println("Enter \n 1. To add the new AddressBook\n 2. To add contact in AddressBook\n "
 					+ "3. To edit the contact in AddressBook\n 4. To delete the contact in AddressBook\n 5. To delete the AddressBook\n "
 					+ "6. To Print the AddressBook\n 7. To Print the contacts in AddressBook\n 8. Search Person By City. \n 9. Search Person by State \n 10. View Person by City \n 11. View Person by State  "
-					+ "\n 12. Count People \n 13.Write To File \n 14.Read from file  0. To exit");
+					+ "\n 12. Count People \n 13.Write To File \n 14.Read from file  "
+					+ "\n 15.Write to CSV file \n 16.Read From CSV 0. To exit");
 			Scanner scanner = new Scanner(System.in);
 			int choice = scanner.nextInt();
 			switch (choice) {
@@ -306,11 +308,9 @@ public class AddressBook {
 				break;
 			case 12:
 				ma.countPeopleByRegion(personByCity);
-			case 13:
+		
 			
-				io.writeData(contact);
-			case 14:
-				io.printData();
+				
 			case 0:
 				System.exit(0);
 				break;

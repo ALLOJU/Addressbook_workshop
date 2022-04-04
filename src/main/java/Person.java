@@ -1,17 +1,26 @@
+import com.opencsv.bean.CsvBindByName;
+
 /**
  * Model class to create data
  * @author mounika
  *
  */
 public class Person {
-
+	@CsvBindByName
 	private String firstname;
+	@CsvBindByName
 	private String lastname;
+	@CsvBindByName
 	private String address;
+	@CsvBindByName
 	private String city;
+	@CsvBindByName
 	private String state;
+	@CsvBindByName
 	private int zip;
+	@CsvBindByName
 	private long phone_number;
+	@CsvBindByName
 	private String email;
 	/**
 	 * created setters and getters for setting data and retrieve data
