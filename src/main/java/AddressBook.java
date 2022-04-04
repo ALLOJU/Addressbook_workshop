@@ -14,6 +14,10 @@ public class AddressBook {
 	 * 3.createContact- This method is used to create contact and store the values into arraylist
 	 * 4.editPerson - Method to edit contact details of person with their name
 	 * 5.findContacts - find contacts with the given name
+	 * 6.deleteContact -Method to delete contacts with the given name
+	 * 7.addPersonToCity - In this method we are checking the person by state
+	 * 8.addPersonToState - In this method we are checking the person by state
+	 * 9.displayContact - method to display all persons present address book
 	 * 
 	 */
 	/**
@@ -209,7 +213,7 @@ public class AddressBook {
 
 	
 	/**
-	 * Method to delete contacts with the given name
+	 *5. Method to delete contacts with the given name
 	 */
 	public void deleteContact() { 
 		Scanner sc=new Scanner(System.in);
@@ -261,6 +265,14 @@ public class AddressBook {
 			System.out.println(persons);
 			System.out.println("Value is " + persons.values());
 	}
+	/**
+	 * Main method to perform all operations 
+	 * here i'm using switch case to perform all CRUD operations and search person,Count people 
+	 * and i'm also done file operations IO Streams 
+	 * @param args
+	 * @throws AddressBookException
+	 * @throws IOException
+	 */
 	public static void main(String[] args) throws AddressBookException, IOException {
 		AddressBook ab=new AddressBook();
 		MultipleAddressBook ma=new MultipleAddressBook();

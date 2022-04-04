@@ -16,6 +16,11 @@ public class AddressBookDBService {
             addressBookDBService = new AddressBookDBService();
         return addressBookDBService;
     }
+    /**
+     * Method to read data from database 
+     * @return
+     * @throws AddressBookException 
+     */
 
     public List<Person> readData() throws AddressBookException {
         String sql = "SELECT * FROM address_book";
@@ -33,7 +38,12 @@ public class AddressBookDBService {
         }
         return addressBookList;
     }
-
+    /**
+     * Method to get details of address_book table by using resultset object
+     * @param resultSet
+     * @return
+     * @throws AddressBookException
+     */
     private List<Person> getAddressBookData(ResultSet resultSet) throws AddressBookException {
         List<Person> addressBookList = new ArrayList<>();
         try {

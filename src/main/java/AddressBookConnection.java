@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 public class AddressBookConnection {
 	/**
-	 * Connecting program to database
+	 * Connecting program to database using URL,USERNAME and PASSWORD
 	 */
 	public static final String URL = "jdbc:mysql://localhost:3306/addressbookservicedb?useSSL=false";
 	public static final String USER = "root";
@@ -13,6 +13,9 @@ public class AddressBookConnection {
 
 	public static Connection getConnection() {
 		try {
+			/**
+			 * Driver class name to connect the database
+			 */
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			connection = DriverManager.getConnection(URL, USER, PASSWORD);
 		} catch (ClassNotFoundException e) {
