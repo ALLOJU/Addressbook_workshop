@@ -9,4 +9,14 @@ public class AddressBookException extends Exception {
 	public AddressBookException(String message) {
 		super(message);
 	}
+	 enum ExceptionType {
+	        DATABASE_EXCEPTION, NO_SUCH_CLASS
+	    }
+
+	    public ExceptionType type;
+
+	    public AddressBookException(String message, ExceptionType type) {
+	        super(message);
+	        this.type = type;
+	    }
 }
